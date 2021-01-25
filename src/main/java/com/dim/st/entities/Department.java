@@ -1,34 +1,62 @@
 package com.dim.st.entities;
 
-
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name="department")
 public class Department {
 	
+	 	@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "dept_id")
+	    private int deptId;
+	 	
+	    @Column(name = "dept_name")
+	    private String deptName;
+	    
+	    @Column(name = "location_id")
+	    private int locationId;
+	    
+	    public Department() {
+	    	
+	    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dept_id")
-    private int deptId;
+		public Department(int deptId, String deptName, int locationId) {
+			super();
+			this.deptId = deptId;
+			this.deptName = deptName;
+			this.locationId = locationId;
+		}
 
-    @Column(name = "dept_name")
-    private String deptName;
-    
-//    @Column(name = "location_id")
-//    private String locationId;
-    
-    
+		public int getDeptId() {
+			return deptId;
+		}
 
-//    @ManyToOne
-//    @JoinColumn(name = "location_id", nullable = false)
-//    private DepartmentLocations departmentLocations;
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy ="department")
-//    private Set<Employee> employees;
+		public void setDeptId(int deptId) {
+			this.deptId = deptId;
+		}
+
+		public String getDeptName() {
+			return deptName;
+		}
+
+		public void setDeptName(String deptName) {
+			this.deptName = deptName;
+		}
+
+		public int getLocationId() {
+			return locationId;
+		}
+
+		public void setLocationId(int loacationId) {
+			this.locationId = locationId;
+		}
+	    
+	    
+
 }
-
-

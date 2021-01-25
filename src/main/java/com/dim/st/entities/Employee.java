@@ -55,8 +55,6 @@ public class Employee {
 	    	  
 	    }
 
-
-
 		public Employee(int employeeId, String lastName, String firstName, String job, int mngId, Date hireDate,
 				double salary, double comm, int deptId) {
 			super();
