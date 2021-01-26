@@ -1,10 +1,12 @@
 package com.dim.st.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +15,6 @@ public class Department {
 	
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "dept_id")
 	    private int deptId;
 	 	
 	    @Column(name = "dept_name")
@@ -22,13 +23,16 @@ public class Department {
 	    @Column(name = "location_id")
 	    private int locationId;
 	    
+	    @OneToOne(cascade=CascadeType.ALL)
+	    private DepartmentLocations departmentLocations;
+	    
+		
 	    public Department() {
 	    	
 	    }
 
-		public Department(int deptId, String deptName, int locationId) {
+		public Department(String deptName, int locationId) {
 			super();
-			this.deptId = deptId;
 			this.deptName = deptName;
 			this.locationId = locationId;
 		}
@@ -53,9 +57,11 @@ public class Department {
 			return locationId;
 		}
 
-		public void setLocationId(int loacationId) {
+		public void setLocationId(int locationId) {
 			this.locationId = locationId;
 		}
+
+		
 	    
 	    
 

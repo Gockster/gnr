@@ -19,12 +19,7 @@ public class Employee {
 	
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "employee_id")
 	    private int employeeId;
-
-//	    @ManyToOne
-//	    @JoinColumn(name = "dept_id", nullable = false)
-//	    private Department department;
 
 	    @Column(name = "last_name")
 	    private String lastName;
@@ -48,15 +43,15 @@ public class Employee {
 	    @Column(name = "comm")
 	    private double comm;
 
-	    @Column(name = "dept_id")
-	    private int deptId;
+	    @Column(name = "depart_id")
+	    private int departmentId;
 	    
 	    public Employee() {
 	    	  
 	    }
 
-		public Employee(int employeeId, String lastName, String firstName, String job, int mngId, Date hireDate,
-				double salary, double comm, int deptId) {
+		public Employee(int employeeId, String lastName, String firstName, String job, int mngId, Date hireDate, double salary,
+				double comm, int departmentId) {
 			super();
 			this.employeeId = employeeId;
 			this.lastName = lastName;
@@ -66,10 +61,8 @@ public class Employee {
 			this.hireDate = hireDate;
 			this.salary = salary;
 			this.comm = comm;
-			this.deptId = deptId;
+			this.departmentId = departmentId;
 		}
-
-
 
 		public int getEmployeeId() {
 			return employeeId;
@@ -78,14 +71,6 @@ public class Employee {
 		public void setEmployeeId(int employeeId) {
 			this.employeeId = employeeId;
 		}
-
-//		public Department getDepartment() {
-//			return department;
-//		}
-//
-//		public void setDepartment(Department department) {
-//			this.department = department;
-//		}
 
 		public String getLastName() {
 			return lastName;
@@ -143,13 +128,12 @@ public class Employee {
 			this.comm = comm;
 		}
 
-		public int getDeptId() {
-			return deptId;
+		public int getDepartmentId() {
+			return departmentId;
 		}
 
-		public void setDeptId(int deptId) {
-			this.deptId = deptId;
+		public void setDepartmentId(int departmentId) {
+			this.departmentId = departmentId;
 		}
-
-	    
+		
 }
