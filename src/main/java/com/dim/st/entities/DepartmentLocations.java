@@ -43,6 +43,11 @@ public class DepartmentLocations {
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
 	}
+
+	@Override
+	public String toString() {
+		return "DepartmentLocations [deptLocationId=" + deptLocationId + ", locationName=" + locationName + "]";
+	}
 	
 	
 }

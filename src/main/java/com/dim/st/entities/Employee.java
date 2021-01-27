@@ -2,8 +2,10 @@ package com.dim.st.entities;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,7 @@ public class Employee {
 	
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "employee_id")
 	    private int employeeId;
 
 	    @Column(name = "last_name")
@@ -43,17 +46,19 @@ public class Employee {
 	    @Column(name = "comm")
 	    private double comm;
 
-	    @Column(name = "depart_id")
-	    private int departmentId;
+	    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
+	    		CascadeType.DETACH, CascadeType.REFRESH},
+	    		fetch = FetchType.LAZY)
+	    @JoinColumn(name="depart_id")
+	    private Department department;
 	    
 	    public Employee() {
 	    	  
 	    }
 
-		public Employee(int employeeId, String lastName, String firstName, String job, int mngId, Date hireDate, double salary,
-				double comm, int departmentId) {
+		public Employee(String lastName, String firstName, String job, int mngId, Date hireDate, double salary,
+				double comm, Department department) {
 			super();
-			this.employeeId = employeeId;
 			this.lastName = lastName;
 			this.firstName = firstName;
 			this.job = job;
@@ -61,7 +66,7 @@ public class Employee {
 			this.hireDate = hireDate;
 			this.salary = salary;
 			this.comm = comm;
-			this.departmentId = departmentId;
+			this.department = department;
 		}
 
 		public int getEmployeeId() {
@@ -128,12 +133,20 @@ public class Employee {
 			this.comm = comm;
 		}
 
-		public int getDepartmentId() {
-			return departmentId;
+		public Department getDepartment() {
+			return department;
 		}
 
-		public void setDepartmentId(int departmentId) {
-			this.departmentId = departmentId;
+		public void setDepartment(Department department) {
+			this.department = department;
 		}
+
+//		@Override
+//		public String toString() {
+//			return "Employee [employeeId=" + employeeId + ", lastName=" + lastName + ", firstName=" + firstName
+//					+ ", job=" + job + ", mngId=" + mngId + ", hireDate=" + hireDate + ", salary=" + salary + ", comm="
+//					+ comm + "]";
+//		}
+
 		
 }

@@ -22,7 +22,7 @@
 				<th>Hire Date</th>
 				<th>Salary</th>
 				<th>Comm</th>
-				<th>Department Id</th>
+				<th>working on department:</th>
 				
 			</tr>
 		</thead>
@@ -37,7 +37,7 @@
 				<td th:text="${tempEmployee.hireDate}" />
 				<td th:text="${tempEmployee.salary}" />
 				<td th:text="${tempEmployee.comm}" />
-				<td th:text="${tempEmployee.departmentId}" />	
+				<td th:text="${tempEmployee.department.getDeptName()}" />	
 				
 			</tr>
 		</tbody>		
