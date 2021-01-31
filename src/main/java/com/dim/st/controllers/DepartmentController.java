@@ -29,13 +29,5 @@ public class DepartmentController {
 		return "list-departments";	
 	}
 
-//	@GetMapping("/{dept_id}")
-//	public String dpl(@PathVariable("location_id") int location_id, Model theModel) {
-//		
-//		Optional<Department> theDepartment = departmentRepository.findById(location_id);
-//		theModel.addAttribute("depto",theDepartment);
-//		return "list-departments";
-//		
-//	}
 
 }

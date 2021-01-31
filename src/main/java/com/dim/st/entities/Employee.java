@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="employee")
@@ -50,6 +52,7 @@ public class Employee {
 	    		CascadeType.DETACH, CascadeType.REFRESH},
 	    		fetch = FetchType.LAZY)
 	    @JoinColumn(name="depart_id")
+	    @JsonIgnore
 	    private Department department;
 	    
 	    public Employee() {
@@ -97,6 +100,7 @@ public class Employee {
 			return job;
 		}
 
+		
 		public void setJob(String job) {
 			this.job = job;
 		}
@@ -141,12 +145,12 @@ public class Employee {
 			this.department = department;
 		}
 
-//		@Override
-//		public String toString() {
-//			return "Employee [employeeId=" + employeeId + ", lastName=" + lastName + ", firstName=" + firstName
-//					+ ", job=" + job + ", mngId=" + mngId + ", hireDate=" + hireDate + ", salary=" + salary + ", comm="
-//					+ comm + "]";
-//		}
+		@Override
+		public String toString() {
+			return "Employee [employeeId=" + employeeId + ", lastName=" + lastName + ", firstName=" + firstName
+					+ ", job=" + job + ", mngId=" + mngId + ", hireDate=" + hireDate + ", salary=" + salary + ", comm="
+					+ comm + "]";
+		}
 
 		
 }
