@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.dim.st.entities.Department;
-import com.dim.st.entities.DepartmentLocations;
 
 
 public interface DepartmentRepository extends JpaRepository<Department, Integer>{
@@ -14,8 +13,10 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
 	public List<Department> findAll();
 	
 	public Department findByDeptName(String deptName);
+
+	public Department findByDeptId(Integer theId);
 	
-	public Department findByDepartmentLocations(DepartmentLocations departmentLocations);
+	
 
 
 

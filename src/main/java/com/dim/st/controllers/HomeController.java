@@ -7,11 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.dim.st.dao.DepartmentLocationsRepository;
 import com.dim.st.dao.DepartmentRepository;
 import com.dim.st.dao.EmployeeRepository;
 import com.dim.st.entities.Department;
-import com.dim.st.entities.DepartmentLocations;
 import com.dim.st.entities.Employee;
 
 @Controller
@@ -23,8 +21,7 @@ public class HomeController {
 	@Autowired 
 	DepartmentRepository departmentRepository;
 	
-	@Autowired 
-	DepartmentLocationsRepository departmentLocationsRepository;
+	
 	 
 	
 	@GetMapping("/")
@@ -35,9 +32,6 @@ public class HomeController {
 		
 		List<Department> theDepartments = departmentRepository.findAll();
 		theModel.addAttribute("departments", theDepartments);
-		
-		List<DepartmentLocations> theLocs = departmentLocationsRepository.findAll();
-		theModel.addAttribute("locs", theLocs);
 		
 		return "home";
 		

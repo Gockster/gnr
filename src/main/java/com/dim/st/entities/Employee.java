@@ -1,20 +1,15 @@
 package com.dim.st.entities;
 
-import java.sql.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.CreationTimestamp;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 
 @Entity
@@ -22,54 +17,46 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Employee {
 	
 	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    @Column(name = "employee_id")
 	    private int employeeId;
 
 	    @Column(name = "last_name")
+	    @NotBlank(message="*Must give a last name")
+		@Size(min=1, max=10)
 	    private String lastName;
-
+	    
 	    @Column(name = "first_name")
+	    @NotBlank(message="*Must give a first name")
+		@Size(min=1, max=8)
 	    private String firstName;
 
 	    @Column(name = "job")
+	    @NotBlank(message="*Must give a job title")
+		@Size(min=1, max=5)
 	    private String job;
 
 	    @Column(name = "mng_id")
 	    private int mngId;
-
-	    @Column(name = "hire_date")
-	    @CreationTimestamp
-	    private Date hireDate;
 
 	    @Column(name = "salary")
 	    private double salary;
 
 	    @Column(name = "comm")
 	    private double comm;
-
-	    @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
-	    		CascadeType.DETACH, CascadeType.REFRESH},
-	    		fetch = FetchType.LAZY)
-	    @JoinColumn(name="depart_id")
-	    @JsonIgnore
-	    private Department department;
 	    
 	    public Employee() {
 	    	  
 	    }
 
-		public Employee(String lastName, String firstName, String job, int mngId, Date hireDate, double salary,
-				double comm, Department department) {
+		public Employee(String lastName, String firstName, String job, int mngId, double salary, double comm) {
 			super();
 			this.lastName = lastName;
 			this.firstName = firstName;
 			this.job = job;
 			this.mngId = mngId;
-			this.hireDate = hireDate;
 			this.salary = salary;
 			this.comm = comm;
-			this.department = department;
 		}
 
 		public int getEmployeeId() {
@@ -100,7 +87,6 @@ public class Employee {
 			return job;
 		}
 
-		
 		public void setJob(String job) {
 			this.job = job;
 		}
@@ -111,14 +97,6 @@ public class Employee {
 
 		public void setMngId(int mngId) {
 			this.mngId = mngId;
-		}
-
-		public Date getHireDate() {
-			return hireDate;
-		}
-
-		public void setHireDate(Date hireDate) {
-			this.hireDate = hireDate;
 		}
 
 		public double getSalary() {
@@ -137,20 +115,10 @@ public class Employee {
 			this.comm = comm;
 		}
 
-		public Department getDepartment() {
-			return department;
-		}
-
-		public void setDepartment(Department department) {
-			this.department = department;
-		}
-
 		@Override
 		public String toString() {
 			return "Employee [employeeId=" + employeeId + ", lastName=" + lastName + ", firstName=" + firstName
-					+ ", job=" + job + ", mngId=" + mngId + ", hireDate=" + hireDate + ", salary=" + salary + ", comm="
-					+ comm + "]";
+					+ ", job=" + job + ", mngId=" + mngId + ", salary=" + salary + ", comm=" + comm + "]";
 		}
 
-		
 }

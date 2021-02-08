@@ -1,49 +1,43 @@
 package com.dim.st.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="department")
 public class Department {
 	
 	 	@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 	@GeneratedValue(strategy = GenerationType.AUTO)
 	    private int deptId;
 	 	
+	 	
 	    @Column(name = "dept_name")
+	    @NotBlank(message="*Must give a departments name")
+		@Size(min=1, max=10)
 	    private String deptName;
 	    	    
-	    @OneToOne(cascade=CascadeType.ALL)
-	    @JoinColumn(name="location_id")
-	    private DepartmentLocations departmentLocations;
-	    
-	    @OneToMany(mappedBy="department",
-	    		cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
-	    	    		CascadeType.DETACH, CascadeType.REFRESH})
-	    @JsonIgnore
-	    private List<Employee> employees;
+	    @Column(name = "dept_description")
+	    @NotBlank(message="*Must give a departments description dude")
+		@Size(min=1, max=15)
+	    private String deptDescription;
 	    
 	    public Department() {
 	    	
 	    }
 
-		public Department(String deptName) {
+		public Department(String deptName, String deptDescription) {
 			super();
 			this.deptName = deptName;
+			this.deptDescription = deptDescription;
 		}
 
 		public int getDeptId() {
@@ -62,35 +56,20 @@ public class Department {
 			this.deptName = deptName;
 		}
 
-		public DepartmentLocations getDepartmentLocations() {
-			return departmentLocations;
+		public String getDeptDescription() {
+			return deptDescription;
 		}
 
-		public void setDepartmentLocations(DepartmentLocations departmentLocations) {
-			this.departmentLocations = departmentLocations;
+		public void setDeptDescription(String deptDescription) {
+			this.deptDescription = deptDescription;
 		}
 
 		@Override
 		public String toString() {
-			return "Department [deptId=" + deptId + ", deptName=" + deptName + ", departmentLocations="
-					+ departmentLocations + ", employees=" + employees + "]";
+			return "Department [deptId=" + deptId + ", deptName=" + deptName + ", deptDescription=" + deptDescription
+					+ "]";
 		}
-
-		public List<Employee> getEmployees() {
-			return employees;
-		}
-
-		public void setEmployees(List<Employee> employees) {
-			this.employees = employees;
-		}
-		
-		//adding convenience method for bi-directional relationship
-		public void add(Employee theEmp) {
-			if(employees == null) {
-				employees = new ArrayList<>();
-			}
-			employees.add(theEmp);
-			theEmp.setDepartment(this);
-		}
-	
+	    
 }
+
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header"></head>
+
+<nav th:replace="layouts :: navbar"></nav>
+<br>
+<body>
+		<div class="container">
+		<form th:action="@{/employees/save}" th:object="${employee}" method="POST">
+		<!-- This will be used to bind to the employee that was checked on (USED FOR UPDATES)-->
+		<input type="hidden" th:field="${employee.employeeId}"/>
+		<div class="form-group row">
+		<input type="text" placeholder="Employee's First Name" th:field="${employee.firstName}">
+		<span style="color:green" th:if="${#fields.hasErrors('firstName')}"
+				th:errors="${employee.firstName}">
+		</span>
+		</div>
+		<div class="form-group row">
+		<input type="text" placeholder="Employee's Last Name" th:field="${employee.lastName}">
+		<span style="color:green" th:if="${#fields.hasErrors('lastName')}"
+				th:errors="${employee.lastName}">
+		</span>
+		</div>
+		<div class="form-group row">
+		<input type="text" placeholder="Employee's Job" th:field="${employee.job}">
+		<span style="color:green" th:if="${#fields.hasErrors('job')}"
+				th:errors="${employee.job}">
+		</span>
+		</div>
+		<div class="form-group row">
+		<input type="text" placeholder="Employee's Mng Id" th:field="${employee.mngId}">
+		</div>
+		<div class="form-group row">
+		<input type="text" placeholder="Employee's Salary" th:field="${employee.salary}">
+		</div>
+		<div class="form-group row">
+		</div>
+		<div class="form-group row">
+		<input type="text" placeholder="Employee's comm" th:field="${employee.comm}">
+ 		</div>
+ 		
+ 		<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> -->
+ 		
+ 		<button class="btn btn-info col-2" type="submit">Create Employee</button>
+		</form>
+</div>	
+
+</body>
+
+</html>		
